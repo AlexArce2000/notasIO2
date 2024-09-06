@@ -287,3 +287,207 @@ $\text{Decisión según cada criterio:}$
 6. La decisión según el criterio Hurwicz con indice de optimismo = 0,75 es ... [La fila donde seleccioné]
 
 7. La decisión según el criterio Hurwicz con indice de optimismo = 0,25 es ... [La fila donde seleccioné]
+
+
+## Toma de decisiones bajo riesgo
+Cuando tienes que elegir entre diferentes opciones sabiendo que cada una tiene una cierta posibilidad de éxito o fracaso.
+
+Las decisiones se toman bajo el  $\text{criterio de valor esperado}$
+
+$VE_{i}$: Valor esperado 
+
+$P_{j}$: Probabilidad del estado de la naturaleza
+
+**Formula:** 
+$$\sum VE_{i}*P_{j}$$
+
+Los ejercicios suelen presentarse como:
+
+$
+\text{Alternativas} = 
+\begin{cases} 
+\text{Invertir en A} 
+\\
+\text{Invertir en B}
+\end{cases}
+$
+
+$
+\text{Estados de la naturalez} = 
+\begin{cases} 
+\text{Mercado Favorable (MF)} 
+\\
+\text{Mercado Desfavorable (MD)}
+\end{cases}
+$
+
+$\text{P(MF)=(probabilidad en el mercado alcista o favorable)}$
+
+$\text{P(MD)=(probabilidad en el mercado bajista o desfavorable)}$
+
+$\text{1. Elaborar una matriz de retribuciones}$
+
+$\text{2. Aplicar la formula}$
+
+Ejemplo:
+
+Supongamos que se desea invertir $10,000 en el mercado de valores adquiriendo acciones en una de dos compañías: A y B. Las acciones de la 
+compañía A, aún cuando son riesgosas, podrían redituar 50% durante el 
+siguiente año, en un mercado favorable. Si las condiciones del mercado de 
+valores no son favorables (es decir, un mercado “bajista”) las acciones 
+pueden perder 20% de su valor. La compañía B proporciona inversiones 
+seguras con 15% de rendimiento en un mercado “alcista” y de sólo 5% en un 
+mercado “bajista”. Todas las publicaciones que se ha consultado pronostican una probabilidad de 60% de un mercado “alcista” y 40% de un mercado 
+“bajista”. ¿Cómo se debe invertir el dinero?   
+a) Construye la matriz de retribuciones del problema incluyendo la 
+información de las probabilidades.  
+b) Resuelve el problema por el Criterio del Valor Esperado (VE). 
+
+
+$\text{capital=10000}$
+
+$
+\text{Alternativas} = 
+\begin{cases} 
+\text{Invertir en A} 
+\\
+\text{Invertir en B}
+\end{cases}
+$
+
+$
+\text{Estados de la naturaleza} = 
+\begin{cases} 
+\text{Mercado Favorable (MF)} 
+\\
+\text{Mercado desfavorable (MD)}
+\end{cases}
+$
+
+$\text{P(MF)=0.6}$
+
+$\text{P(MD)=0.4}$
+
+a) 
+Matriz de retribuciones
+|   |   |    |
+|---|---|----|
+|Alternativas/Estados| MF | MD|
+|Invertir en A| 5000| -20000|
+|Invertir en B| 1500| 500|
+|||
+
+b) Resolución por Criterio del valor esperado (VE)
+
+$\sum VE_{i}*P_{j}$
+
+$VE(A)= 5000*0.6 + (-2000)*0.4 = 2200$
+
+$VE(B)= 1500*0.6 + (500)*0.4 = 1100$
+
+El que genere más inversión: 
+
+$VE*= max\{2200,1100\}=2200$ entonces se debe invertir en A
+
+
+## Árbol de decisión
+
+- **Nodo Circular:** representa un punto de donde se desprenden estados de la naturaleza 
+- **Nodo Cuadrangular:** representa un punto de donde se desprenden alternativas (nodo de decisión)
+
+Ejemplo de las inversiones:
+
+````mermaid
+graph LR
+    A[2200] -->|Inversion A| B((VE 2200))
+    A -->|Inversion B| C((VE 1100))
+    B -->|MF = 0.6| D[5000] 
+    B -->|MD = 0.4| F[-2000]
+    C -->|MF = 0.6| E[1500]
+    C -->|MD = 0.4| H[500]
+
+````
+
+$\text{Valor esperado con información perfecta (VECIP)}$
+
+Formula:
+
+$\text{VECIP}= \sum (\text{Mejor pago bajo el estudio j})*Prob$
+
+$ \ \ \  \   \  \   \  \ \ \ \ \    \    \ = 5000*0.6+500*0.4$
+
+> Mejor pago tanto del mercado favorable como desfavorable
+
+$\text{VE=2200}$
+
+
+$\text{Valor Esperado de la Información Perfecta (VEIP)}$
+
+$VEIP = VECIP - 2200$
+
+Estamos dispuestos a pagar hasta 1000 por la información perfecta
+
+$\text{Posibles resultados de estudio}$
+A favor - en contra
+
+Por ejemplo:
+
+90% de probabilidad de invertir (a favor) en un mercado favorable
+
+se reduce 50% en un mercado bajista
+
+-
+$\text{P(A FAVOR/ MF) = 0.9 Exito MF}$
+
+$\text{P(En contra/ MF) = 0.1 Fracaso MF}$
+
+$\text{P(A FAVOR/ MD) = 0.5 Exito MF}$
+
+$\text{P(En contra/ MD) = 0.5 Exito MF}$
+
+-
+$\text{Probabilidad a Priori}$
+
+Se puede realizar una investigación especifica (información muestral) (estudio de mercado)
+
+````mermaid
+graph TD
+    A[Provee probabilidad condicionales]
+    A --> B[Probabilidad Conjuntos]
+    A --> C[Probabilidad Absoluta]
+    B --> D[Probabilidad a Posteriori]
+    C --> D[Probabilidad a Posteriori]
+````
+
+$V_{1}=\text{a favor}$
+
+$m_{1}=\text{MF}$
+
+$
+\text{Probabilidad condicionales para MF} = 
+\begin{cases} 
+\text{P(V1\textbackslash M1)} 
+\\
+\text{P(V2\textbackslash M1)} 
+\end{cases}
+$
+
+$
+\text{Probabilidad condicionales para MD} = 
+\begin{cases} 
+\text{P(V1\textbackslash M2)} 
+\\
+\text{P(V2\textbackslash M2)} 
+\end{cases}
+$
+
+**Probabilidades Conjuntas**
+
+$\text{P(Vj\textbackslash mi)*P(mi)} $
+
+**Probabilidades absolutas**
+
+$\text{P(Vj)=}\sum P\text{(Vj \textbackslash mi)*P(mi)} $
+
+**** 
+
