@@ -412,7 +412,7 @@ $\text{Valor esperado con información perfecta (VECIP)}$
 
 Formula:
 
-$\text{VECIP}= \sum (\text{Mejor pago bajo el estudio j})*Prob$
+$\text{VECIP}= \sum (\text{Mejor pago bajo el estudio j})*ProbApriori$
 
 $ \ \ \  \   \  \   \  \ \ \ \ \    \    \ = 5000*0.6+500*0.4$
 
@@ -427,7 +427,13 @@ $VEIP = VECIP - 2200$
 
 Estamos dispuestos a pagar hasta 1000 por la información perfecta
 
-$\text{Posibles resultados de estudio}$
+$\text{Valor esperado de la información muestral}\\$
+$\text{VEIM = VECIM + CostoDelEstudio - VESIM}\\$
+
+$\text{VECIM: Valore esperado con información muestral: valor que se consigue sin estudio - a priori resultado}\\$
+$\text{VESIM: Valore esperado sin información muestral: valor que se consigue con estudio - a posteriori resultado}\\$
+
+$\text{Posibles resultados de estudio}\\$
 A favor - en contra
 
 Por ejemplo:
@@ -466,28 +472,81 @@ $m_{1}=\text{MF}$
 $
 \text{Probabilidad condicionales para MF} = 
 \begin{cases} 
-\text{P(V1\textbackslash M1)} 
+\text{P(V1 | M1)} 
 \\
-\text{P(V2\textbackslash M1)} 
+\text{P(V2 | M1)} 
 \end{cases}
 $
 
 $
 \text{Probabilidad condicionales para MD} = 
 \begin{cases} 
-\text{P(V1\textbackslash M2)} 
+\text{P(V1 | M2)} 
 \\
-\text{P(V2\textbackslash M2)} 
+\text{P(V2 | M2)} 
 \end{cases}
 $
 
 **Probabilidades Conjuntas**
 
-$\text{P(Vj\textbackslash mi)*P(mi)} $
+$\text{P(Vj | mi)*P(mi)} $
 
 **Probabilidades absolutas**
 
-$\text{P(Vj)=}\sum P\text{(Vj \textbackslash mi)*P(mi)} $
+$\text{P(Vj)=}\sum P\text{(Vj | mi)*P(mi)} $
+
+****
+| |
+|-|
+|Definición de variables|
+|$v_1$=voto a favor|
+|$v_2$=voto en contra|
+|$m_1$=mercado favorable|
+|$m_2$=mercado desfavorable|
+
+|||
+|-|-|
+|P(m1)|0,6|
+|P(m2)|0,4|
+
+- Sacar:
+
+$\text{Probabilidad a priori: }$ Probabildidades iniciales
+
+
+$\text{Probabilidades condicionales: }$ son la probabilidad de que algo suceda bajo la condición de que ya sabemos que otra cosa ha sucedido. Por ejemplo "a favor o en contra de invertir"
+
+$\text{P(v1|m1)} \ \text{voto a favor en mercado favorable}\\$ 
+$\text{P(v2|m1)} \ \text{voto en contra en mercado favorable}\\$
+$\text{P(v1|m2)} \ \text{voto a favor en mercado desfavorable}\\$
+$\text{P(v2|m2)} \ \text{voto en contra en mercado desfavorable}\\$
+
+
+
+$\text{Probabilidades conjuntas: }$ Combinación de eventos y se usa para detectar el valor esperado
+
+$\text{P(v1|m1)P(m1)}\\$
+$\text{P(v2|m1)P(m1)}\\$
+$\text{P(v1|m2)P(m2)}\\$
+$\text{P(v2|m2)P(m2)}\\$
+
+
+$\text{Probabilidades absolutas: }$ sumatoria de las probabilidades abasolutas teniendo en cuenta los votos a favor (v1) y en contra (v2)
+
+$P(v1)=\text{P(v1|m1)P(m1)}+\text{P(v1|m2)P(m2)}\\$ 
+$P(v2)=\text{P(v2|m1)P(m1)}+\text{P(v2|m2)P(m2)}\\$
+
+$\text{Probabilidades a posteriori:}\\$ 
+$\text{P(m1|v1)= probabilidadesConjuntas(P(m1))/probabilidadesAbs(P(v1))}\\$
+$\text{P(m2|v1)= probabilidadesConjuntas(P(m2))/probabilidadesAbs(P(v1))} \\$
+$\text{P(m1|v2)= probabilidadesConjuntas(P(m1))/probabilidadesAbs(P(v2))} \\$
+$\text{P(m2|v2)= probabilidadesConjuntas(P(m2))/probabilidadesAbs(P(v2))} \\$
 
 **** 
+Posibles preguntas:
 
+$\text{Según los resultados globales es conveniente realizar el esudio de mercado porque?}\\$
+$\text{ * Si conviene porque el rvalor esperado con estudio es mayor que sin estudio}\\$
+$\text{ * No conviene porque la diferencia entre los valores esperados no es significativo como para hacer todo un trabajo de implementacipon de un estudio de mercado}$
+
+## Analisis de sensibilidad
