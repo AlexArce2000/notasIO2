@@ -550,3 +550,4 @@ $\text{ * Si conviene porque el rvalor esperado con estudio es mayor que sin est
 $\text{ * No conviene porque la diferencia entre los valores esperados no es significativo como para hacer todo un trabajo de implementacipon de un estudio de mercado}$
 
 ## Analisis de sensibilidad
+
