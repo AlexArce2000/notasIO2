@@ -162,7 +162,7 @@ Toma de decisiones baho incertidumbre implica acciones alternativas cuyas restri
 La probabilidad de ocurrencia de cada estado de la naturaleza no se conoce o no se puede determinar. La decisión se toma según "criterios" esto vuelve a la situación, una decisión "subjetiva"
 
 ### **1. Criterio de LAPLACE**
-Probabilidad de ocurrencia de los estados de la naturaleza es igual para todos.
+Probabilidad de ocurrencia de los estados de la naturaleza es igual para todos (los estados son igualmente probables).
 
 Obs: **n** es el nro de columnas
 
@@ -175,7 +175,7 @@ $\text{Elegir el maximo:}$
 
 $${1/n * suma(DeCadaFila)}$$
 
-* Si la matriz de retribución está ##**basada en COSTOS**
+* Si la matriz de retribución está ##**basada en COSTOS o perdidas**
 $$min_{a_j}\{1/n \sum^{n}_{j=1} v(a_i,s_j)\}$$
 
 En excel:
@@ -199,7 +199,7 @@ $\text{Elegir el maximo entre:}$
 
 $$max\{EntreLasFilas\}$$
 
-* Matriz de retribución ##**basada en costos** 
+* Matriz de retribución ##**basada en costos o gastos** 
 
 $\text{Minimin}$
 
@@ -223,7 +223,7 @@ $$Minimax: min_{ai}\{max_{sj}v_{ij}\}$$
 (el minimo entre las maximas alternativas)
 
 ### 4. Criterio de SAVAGE
-Modera el grado de pesimismo y el impacto negtivo de una posible mala decisión.
+Modera el grado de pesimismo y el impacto negtivo de una posible mala decisión.  “modera” el grado de conservadurismo
 
 $
 r(a_i, s_j) = 
@@ -245,6 +245,8 @@ contado con el mejor escenario, independientemente de que la
 matriz original contenga ganancias o costos. 
 
 > Luego hacer una columna de Minimax (Savage) si es costo (matriz de arrepentimiento).
+
+Siempre hacer **minimax** (indiferente si es costo o ganancias la matriz)
 El minimo entre los maximos de la alternativa.
 
 ### 5. Criterio de Hurwicz
@@ -290,7 +292,7 @@ $\text{Decisión según cada criterio:}$
 
 
 ## Toma de decisiones bajo riesgo
-Cuando tienes que elegir entre diferentes opciones sabiendo que cada una tiene una cierta posibilidad de éxito o fracaso.
+Cuando tienes que elegir entre diferentes opciones sabiendo que cada una tiene una cierta posibilidad de éxito o fracaso. Cuando se tenga **probabilidades.**
 
 Las decisiones se toman bajo el  $\text{criterio de valor esperado}$
 
@@ -373,7 +375,7 @@ Matriz de retribuciones
 |   |   |    |
 |---|---|----|
 |Alternativas/Estados| MF | MD|
-|Invertir en A| 5000| -20000|
+|Invertir en A| 5000| -2000|
 |Invertir en B| 1500| 500|
 |||
 
