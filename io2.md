@@ -551,5 +551,11 @@ $\text{Según los resultados globales es conveniente realizar el esudio de merca
 $\text{ * Si conviene porque el rvalor esperado con estudio es mayor que sin estudio}\\$
 $\text{ * No conviene porque la diferencia entre los valores esperados no es significativo como para hacer todo un trabajo de implementacipon de un estudio de mercado}$
 
-## Analisis de sensibilidad
+## Métodos Cuantitativos
+$\text{Tendencia Estacional}$
 
+**Promedio móvil:** Para abarcar todos los cuatro trismestres del año promediar a apartir del tercer trimestre del primer año, hasta el penultimo año.
+
+**Promedio móvil centrado:** Dividir de a dos hasta el penultimo
+
+$\text{Valor Indice: Ventas reales/promedio movil centrado}$
