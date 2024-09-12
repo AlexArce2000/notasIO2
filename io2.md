@@ -134,9 +134,9 @@ Matrices a ser representados:
 **A_{se especifica la matriz de comparación} * PesosDeEsaMatriz**| MMULT(matriz1, matriz2)
 |sacar nmax = suma_del_analisis)|||
 |sacar n = cantidad de filas del vector pesos segun La MATRIZ INCONSISTENTE|||
-|sacar CI= (nmax-n)/(n-1)|||
-|sacar RI=(1.98*(n-2))/(n) |||
-|Calcular RC = CI/RI|||
+|sacar (indice consistencia)CI= (nmax-n)/(n-1)|||
+|sacar (razon de consistencia aleatoria)RI=(1.98*(n-2))/(n) |||
+|Calcular (razon de consistencia aleatoria)RC = CI/RI|||
 
 $recordar: $
 Se dice que el nivel de **inconsistencia es tolerable** si es que **_RC_<0,1**
@@ -554,8 +554,172 @@ $\text{ * No conviene porque la diferencia entre los valores esperados no es sig
 ## Métodos Cuantitativos
 $\text{Tendencia Estacional}$
 
-**Promedio móvil:** Para abarcar todos los cuatro trismestres del año promediar a apartir del tercer trimestre del primer año, hasta el penultimo año.
+### Primer método cuantitativo
+
+**Promedio móvil simple (PMS):** Para abarcar todos los cuatro trismestres del año promediar a apartir del tercer trimestre del primer año, hasta el penultimo año.
+
+Ejemplo: 
+
+Si me da pide $\text{PMS(3)}$ entonces (agarrar los tres primeros y promediar - ubiracarse entonces una celda abajo):
+|||||
+|-|-|-|-|
+|Mes|Ventas|PMS(3)|E.Abs.(3)
+1|20||
+2|24||
+3|27||
+4|31|=PROMEDIO(20;24;37)| =ABS(El primer PMS(3)-el valor de ventas real)
+5|37||
+6|47||
+7|53||
+8|62||
+9|54||
+10|36||
+11|32||
+12|29|Arrastrar hasta acá|arrastrar hasta el mes de dic. el de enero no tendrá error absoluto por no tener valor real|
+13||si quiero tener el PMS del mes de enero del año sgte|
+|||DMA||
+
+**DMA(Desviación media abosuluta)=** Promedio de la columna de errores abs
+
+**E.ABS.** (Error Absoluto)=Ubicarse en la celda donde empezó el PMS y calcular la diferencia entre (PMS-Ventas)
+
+**VIDEO DE LA PROFE**
+
+(conclusión que sacó)
+
+a) Como la DMA del PMS de 3 periodos es menor que la DMA del PMS de 4 periodos, entonces el método más exacto para esta esta serie de datos es hasta ahora el PMS de tres
+periodos
+
 
 **Promedio móvil centrado:** Dividir de a dos hasta el penultimo
 
 $\text{Valor Indice: Ventas reales/promedio movil centrado}$
+
+### Segundo método cuantitativo
+
+**Promedio movil ponderado:**
+Las mas recientes tienen mas valor que las anteriores, mientras mas se alejan los valores sus coef. de pond. se vuelven mas pequeños 
+
+$y_7=0.5*y_6+0.3*y_5+0.1*y_4$
+
+
+Por ejemplo si queremos hacer un PMP(3) necesitamos 3 coeficientes de ponderación alpha2, alpha1, alpha0. Calculo:
+
+||||
+|-|-|-|
+|Coef.de pond.|||
+|alpha2|0.167||
+|alpha1|0.333||
+|alpha0|0.5||
+
+Como es el ejemplo PMP(3) voy a la cuarta celda, entonces se calcula (FIJAR LOS ALPHAS ANTES DE ARRASTRAR):
+
+||||
+|-|-|-|
+|PMP(3)|E.Abs(PMP)|
+|||
+|||
+|||
+|=alpha0 * ventas(marzo)+alpha1 * ventas(febrero) + alpha2 * ventas(enero)| =abs(venta - PMP(3))|
+|....|...|
+|DMA| =PROMEDIO(excepto con el valor que no se agregó en ventas)
+
+
+Recordar: no arrastrar hasta diciembre donde no tiene valor real.
+
+**Conclusión parcial del vídeo de la profe:**
+
+b) como la DMA del PMP del 3 periodo es menor que el DMA del PMS de 3 periodos, entonces el método más exacto para esta serie de datos es hasta ahora el periodo PMP de 3 periodos 
+
+### Tercer método cuantitativo
+
+**Suavizado exponencial:** Resuelve el problema filosofico porque le da mayor importancia a los valores mas recientes y menos importancia cuando se va acercando para el cual quiero sacar el pronostico, tambien resuelve el problema operacional porque no necesitamos almacenamiento muy grande cuando tenemos grandes cantidades de datos porque en cada iteración va pisando los datos anteriores y es como va absorviendo la información de estos datos. Funciona bien cuando tenemos series muy grandes de datos
+
+Requiere una estimación inicial (si el problema no da, tomar el primer valor de ventas como estimación inicial). Se puede poner en el cuadro como el primer valor de ventas. Entonces a partir del periodo dos implementamos la formula;
+
+$y_{(t+1)}=alpha*y_t+(1-alpha)*y_{t}$
+
+|||
+|-|-|
+|Coef. de pond.||
+|alpha|0.5|
+
+recordar: alpha fijar,calcular desde el periodo donde calculamos la formula del suavizado 
+
+|||
+|-|-|
+|Suav. Exp.|E. Abs (suav. exp.)|
+|20|
+|=$alpha$*ventas(enero)+(1-$alpha$)*(20(el 20 de la celda anterior))|  =ABS(venta-Suav. Exp)
+|....|
+|arrastrar hasta el ultimo||
+|DMA | =PROMEDIO(ARRASTAR HASTA EL PENULTIMO SI NO SE TIENE VALOR REAL)|
+
+C) como el suavizado exponencial es menor que el DMA del PMP de 3 periodos, entonces el método más exacto para esta serie de datos es el Suavizado Exponencial
+
+D) el metodo que menos se ajusta a la serie dada es el PMS de 4 periodos (porque tiene el valor mas alto)
+
+Todos fueron observaciones simples
+
+### PRONOSTICOS CAUSALES
+Valores que dependen de causas - Regresión lineal
+
+
+||||
+|-|-|-|
+|Estudiante|Hs de estudio| Calificacion | 
+|1|40|4|
+|2|42|4|
+|3|30|3|
+|4|35|3|
+|5|25|1|
+|6|28|2|
+|7|32|3|
+|8|35|3|
+|9|40|4|
+|10|42|4|
+
+Posibles preguntas:
+
+a) Identifica e indica la variable dependiente y la independiente.
+
+Como se puede establecer que la calificación depende de las horas de estudio entonces la variable dependiente sería y=calificación y la variable independiente ser x= hs de estudio
+
+b) Realiza un gráfico de dispersión de los datos e indica la recta de ajuste.
+
+Seleccionar las variables independiente y dependiente. Insertar grafico de disperción ir luego a la opción con simbolo de más (+) seleccionar linea de tendencia
+
+c) Estima la recta de regresión lineal simple por mínimos cuadrados
+
+Estimar la recta de regresión lineal en el gráfico yendo a linea de tendencia luego en el [>] seleccionar más opciones, luego ir a presentar la ecuac. del gráfico
+
+d) Realiza la predicción de calificación final de un estudiante que dedica 24 horas de estudio de la materia
+
+Predicción para 24 hs de estudio, o sea x=24
+reemplazar en la formular que te dió el gráfico.
+
+e) Calcula el coeficiente de correlación lineal e interpreta su resultado.
+
+EXCEL TIENE UNA FUNCIÓN
+
+$\text{COEF.DE.CORREL(matrizhsdeEstudio;matrizCalif)}$
+
+sin titulos obviamente en la formula de excel
+
+Coeficiente de correlación si
+* Toma valores cercanos a -1 es fuerte e inversa
+* Toma valores carcanos a 1 es fuerte y directa
+* Toma valores cercanos a 0 es debil
+
+
+Rpta de la profe: como el coeficiente de relación salió 0.94 se aprecia una correlación fuerte entre las variables
+
+
+f) Calcula el coeficiente de determinación e interpreta su resultado.
+
+El coeficiente de deteminación es $r^2$ indica el porcentaje de la variación de la variable dependiente y que se explica por el modelo de ajuste
+
+para hallar poner entre las opciones presentar R cuadrado del gráfico y listo.
+
+Para responder si $r^2 = 0.8867$, El valor del coeficiente de determinación indica que el 88.67% de la variabilidad de las calificaciones puede ser explicada por la recta de ecucación (poner la ecuación) tomando como variable causal a las (completar con el nombre de las variables independientes)
+ 
