@@ -723,3 +723,18 @@ para hallar poner entre las opciones presentar R cuadrado del gráfico y listo.
 
 Para responder si $r^2 = 0.8867$, El valor del coeficiente de determinación indica que el 88.67% de la variabilidad de las calificaciones puede ser explicada por la recta de ecucación (poner la ecuación) tomando como variable causal a las (completar con el nombre de las variables independientes)
  
+
+
+ si da una función $y=c_{1}.e^{c_{2}x}$
+
+Hacer cambio de variable: 
+* Usando logaritmos bajar los exponentes:
+$ln(y)=ln(c_1)+ln(e^{c_{2}x})$
+* Cambio de variables:
+
+$z=ln(y)$  
+$k=ln(c_1)$
+
+* la función queda linealizada: $z=k+c_{2}x$ 
+
+Agregar una nueva columna a la tabla: $z=ln(y)$ y crear una grafica de dispersión para luego sacar los valores de la ecuación
