@@ -743,4 +743,51 @@ Agregar una nueva columna a la tabla: $z=ln(y)$ y crear una grafica de dispersi�
 
 ## TEORÍA DE COLAS
 ### Por ejemplo:
+Para todo menciona una tasa de llegada de 50000 productos al año, y los días tienen 8 horas y los años 240 días.
 
+Si por ejemplo dice que existe una Sección A que verifica un producto A con **una máquina** que es capaz de procesar 220 productos al día.
+```
+    (M/M/1):(DG/infinito/infinito): 
+```  
+*Calculos:*
+```
+- PRODUCTO A
+Para lambda o tasa media de llegada:
+    tiempo: 8 hs y 240 días: 240.333
+    Convierto en cuanto es en cada día: 240.333
+    Tasa media de llegadas: 50000 productos/año: 50000/240.33: 208.04
+Para mu:
+    mu: productos_al_día*nro_de_servidores
+    mu: 220*1: 220
+```
+
+*Dentro del POM QM:*
+```
+    Arrival rate (lambda) (tasa media de llegada): 208
+    Service rate (mu): 220
+    Number of servers: 1
+```
+|Parameter	|Value|Parameter|Value|	Hours (based on 8 hr day)|	Hours (based on 24 hr day)|
+|-----------|-----|---------|-----|--------------------------|----------------------------|
+M/M/1  (exponential service times)||Average server utilization|	,95		
+Arrival rate(lambda)|	208		|Average number in the queue(Lq)|	16,39		
+Service rate(mu)|	220|		Average number in the system(L)|	17,33|		
+Number of servers|	1		|Average time in the queue(Wq)|	,08|	,63|	1,89
+|||Average time in the system(W)|	,08|	,67|	2|
+|||Probability (% of time) system is empty (P0)|	,05		
+
+````
+Metricas del POM
+* Average Server Utilization (𝜌): La utilización del servidor es la fracción de tiempo que el servidor está ocupado atendiendo solicitudes. Es un indicador de la eficiencia del sistema, ya que cuanto mayor es la utilización, más tiempo está ocupado el servidor. ¿Qué tan ocupado está el servidor en promedio?
+
+* Average Number in the Queue (L_q): Esta métrica te dice cuántos clientes, en promedio, están esperando ser atendidos en la cola mientras el servidor está ocupado.
+
+* Average Number in the System (L): Esta métrica te dice cuántos clientes/productos están en el sistema completo, es decir, la suma de los clientes/producots que están siendo atendidos y los que están esperando en la cola.
+
+* Average Time in the Queue (W_q): Esta métrica te dice el tiempo promedio que un cliente/producto pasa esperando en la cola antes de ser atendido.
+
+* Average Time in the System (W): Esta métrica te dice el tiempo total que un cliente/producto pasa en el sistema, incluyendo tanto el tiempo que espera en la cola como el tiempo que pasa siendo atendido.
+
+* Probability the System is Empty (P_o): Esta métrica nos dice la probabilidad de que no haya clientes/productos en el sistema en un momento dado. Ocioso
+
+````
