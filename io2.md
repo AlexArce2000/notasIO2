@@ -738,3 +738,9 @@ $k=ln(c_1)$
 * la función queda linealizada: $z=k+c_{2}x$ 
 
 Agregar una nueva columna a la tabla: $z=ln(y)$ y crear una grafica de dispersión para luego sacar los valores de la ecuación
+
+------------------------------------------------------------------------------------------------
+
+## TEORÍA DE COLAS
+### Por ejemplo:
+
