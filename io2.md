@@ -746,8 +746,21 @@ Agregar una nueva columna a la tabla: $z=ln(y)$ y crear una grafica de dispersi�
 Para todo menciona una tasa de llegada de 50000 productos al año, y los días tienen 8 horas y los años 240 días.
 
 Si por ejemplo dice que existe una Sección A que verifica un producto A con **una máquina** que es capaz de procesar 220 productos al día.
+
+Una sección B que se encargar de verficar el tipo de producto B y consta de dos máquinas que procesan cada una 140 productos al día
+
+En la sección C se verifican los productos C prar lo que se dispone de 3 productos, trabajan manualmente y tardan aproximadamente 5 min x producto
 ```
+a)
+Modelo que usa A:
     (M/M/1):(DG/infinito/infinito): 
+
+Modelo que usa B:
+    (M/M/2):(DG/infinito/infinito): 
+
+Modelo que usa C:
+    (M/M/3):(DG/infinito/infinito): 
+
 ```  
 *Calculos:*
 ```
@@ -759,14 +772,40 @@ Para lambda o tasa media de llegada:
 Para mu:
     mu: productos_al_día*nro_de_servidores
     mu: 220*1: 220
+
+- PRODUCTO B
+    lambda: 208
+    mu: 140*2: 280
+- Producto C
+    lambda: 208
+    mu: 
+    1 hora ---- 60 min
+    8 hora ---- x
+    x=480 min 
+    480/5 = 96
+    1 producto ------ 5 min
+
+
 ```
 
 *Dentro del POM QM:*
 ```
+PARA A:
     Arrival rate (lambda) (tasa media de llegada): 208
     Service rate (mu): 220
     Number of servers: 1
+
+PARA B:
+    Arrival rate (lambda) (tasa media de llegada): 208
+    Service rate (mu): 140 (El programa lo multiplicará por el nro de servidores)
+    Number of servers: 2
+
+PARA C:
+    Arrival rate (lambda) (tasa media de llegada): 208
+    Service rate (mu): 96
+    Number of servers: 3   
 ```
+
 |Parameter	|Value|Parameter|Value|	Hours (based on 8 hr day)|	Hours (based on 24 hr day)|
 |-----------|-----|---------|-----|--------------------------|----------------------------|
 M/M/1  (exponential service times)||Average server utilization|	,95		
@@ -776,7 +815,29 @@ Number of servers|	1		|Average time in the queue(Wq)|	,08|	,63|	1,89
 |||Average time in the system(W)|	,08|	,67|	2|
 |||Probability (% of time) system is empty (P0)|	,05		
 
-````
+PARA B
+|Parameter|	Value|Parameter|	Value|	Minutes	|Seconds|
+|-|-|-|-|-|-|
+|M/M/s|			|Average server utilization|	,74|		
+|Arrival rate(lambda)|	208|		Average number in the queue(Lq)|	1,83|		
+Service rate(mu)|	140|		Average number in the system(L)|	3,32|		
+Number of servers|	2|		Average time in the queue(Wq)|	,01|	,53|	31,66|
+|||Average time in the system(W)|	,02|	,96|	57,38|
+|||Probability (% of time) system is empty (P0)|	,15|		
+
+
+
+PARA C
+
+|Parameter|	Value|	Parameter|	Value| Minutes|	Seconds   |
+|---------|------|----------|-------|---------|-----------|
+|M/M/s|	|   Average server utilization|	,72| 		   |
+Arrival rate(lambda)	|208|		Average number in the queue(Lq)|	1,37		
+|Service rate(mu)|	96|		Average number in the system(L)|	3,53|		
+|Number of servers|	3|		Average time in the queue(Wq)|	,01|	,39|	23,64|
+|||Average time in the system(W)|	,02|	1,02|	61,14
+|||Probability (% of time) system is empty (P0)|	,09		
+
 Metricas del POM
 * Average Server Utilization (𝜌): La utilización del servidor es la fracción de tiempo que el servidor está ocupado atendiendo solicitudes. Es un indicador de la eficiencia del sistema, ya que cuanto mayor es la utilización, más tiempo está ocupado el servidor. ¿Qué tan ocupado está el servidor en promedio?
 
@@ -790,4 +851,61 @@ Metricas del POM
 
 * Probability the System is Empty (P_o): Esta métrica nos dice la probabilidad de que no haya clientes/productos en el sistema en un momento dado. Ocioso
 
-````
+
+
+b) ¿cuál es el número de productos de cada tipo que han entrado a su sistema respectivo de verificación? Se
+induyen los productos que están a la espera del proceso como las que están siendo procesados.
+
+Para el producto A, L=17.3
+
+Para el producto B, L= 3.32
+
+Para el producto C, L= 3.53
+
+
+C) ¿En qué afectaría al sistema de la sección B si se colocara un limitador de capacidad, mediante el cual no se
+aceptaran más de 5 productos a la espera del proceso de verificación? Sugerencia: Se puede abordar ia
+respuesta desde el punto de vista del porcentaje de sistema lleno
+
+Maximum system size=7
+c) Para la sección B: Al colocar un limitador de capacidad el promedio de utilización del servidor baja ya que al tener la cola limitada se puede dar el caso de que no haya nadie
+
+```
+    modelo: M/M/S with a Finite System Size
+    parametro: Maximum system size
+```
+
+|Parameter|	Value|Parameter|Value|	Minutes|Seconds|
+|-|-|-|-|-|-|
+|M/M/s with a Finite System Size||Average server utilization|	,71|		
+|Arrival rate(lambda)|	208	|	Average number in the queue(Lq)	|,99		
+|Service rate(mu)|	140	|	Average number in the system(L)|	2,41|		
+|Number of servers|	2	|	Average time in the queue(Wq)|	,0|	,3|	17,85|
+|Maximum system size|	7|		Average time in the system(W)|	,01	|,73|	43,56|
+|||Effective arrival rate	|199,43|		
+|||Probability that system is full	|,04|		
+
+
+d) Supón que en el sistema original la demanda del producto A asciende a 70000 unidades/año Si se opta por no
+comprar una máquina nueva en la Sección A, ¿cuántas horas extra al día debe trabajar la máquina para por lo
+menos empatar la demanda de verificación diaria? (2P)
+
+```
+Tasa media de llegadas: 70000 productos/año: 70000/240.33: 291.2
+Sección A: 220
+
+220 ----- 8hs
+291 ----- x
+x: 10.5 : 11 hs aproximadamente 11-8=3 hs extras
+
+```
+e) ¿cuál es el factor de utilización de la sección C? Recomendarías la contratación de un cuarto operario, ¿por qué?
+
+Average server utilization|	,72| 
+
+Su factor de utilización es del 72% no se recomendaría puesto que aún no se utiliza el total de la servicio
+
+d) De las tres secciones, ¿cuál es la que tiene mayor probabilidad de estar ociosa?
+
+La sección tiene mayor probabilidad de estar ociosa
+
