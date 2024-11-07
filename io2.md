@@ -909,3 +909,112 @@ d) De las tres secciones, ¿cuál es la que tiene mayor probabilidad de estar oc
 
 La sección tiene mayor probabilidad de estar ociosa
 
+## INVENTARIOS
+
+Una empresa vende una línea de autos de carreras. Las ventas son constantes a razón de 80 vehículos al mes. El precio de cada auto es de 120 euros. Los costos de ordenar son aproximadamente 15 euros por pedido, independientemente del tamaño del pedido. Además, la tasa de retención anual es del 20% sobre el precio unitario de los autos. <br>
+a) Determinación de la cantidad económica del pedido (EOQ) y el costo anual total (CAT):
+Suponiendo que no se permiten pedidos en espera. Calcula la cantidad económica del pedido (EOQ) y el costo anual total.<br>
+
+Cantidad económica del pedido: 34.64
+El costo total es 116031,4
+
+
+b) Modelo de autos de carreras con costo de ordenar en espera:
+Utilizando un costo de ordenar en espera anual unitario de 90 euros por unidad, determina la cantidad de pedido de costo mínimo y el costo anual total para el modelo de autos de carreras.<br>
+
+**ELEGIR EL MODELO Back Order Inventory Model** como 90
+
+|Parameter|	Value	|	Parameter	|Value|
+|-|-|-|-|
+|Demand rate(D)|	960|		Optimal order quantity (Q*)|	38,99|
+|Setup/ordering cost(S)	|15		|Maximum Inventory Level (Imax)	|30,78
+|Holding/carrying cost(H)|	24	|	Maximum Inventory Shortage (B)|	8,21|
+|Backorder cost(B)|	90	|	Orders per period (N)|	24,62|
+|||Unit cost	|120	|	Annual Setup cost	|369,35|
+|||Annual Holding cost	|291,59|
+|||Annual Shortage cost	|77,76|
+|||Unit costs (PD)	|115200|
+|||Total Cost (including units)|	115938,7|
+
+* Cantidad de costo de pedido mínimo es igual a 38.99
+* Costo anual 115938,7
+
+c) Frecuencia de pedidos:
+¿Cada cuántos días se hace un pedido, suponiendo que la empresa está abierta 300 días por año, tanto en las políticas de inventario con pedidos en espera como sin ellos?<br>
+USANDO LA TABLA EOQ
+* Calcular el nro de pedidos del año: $D/Q*$ = 960/34.64= 27,71
+* Frecuencia de pedidos= años/nroDePedidos = 300/27,71= 10,82 días
+
+* Costo minimo: NRO de pedidos=$D/Q*$=960/38.99=24.62
+* Frecuencia de pedidos= años/nroDePedidos = 300/24.62= 12,18 días
+
+
+d) Recomendación sobre política de inventarios:
+¿Recomendarías una política de inventario sin pedidos en espera o con pedidos en espera para este producto? Explica tu respuesta.<br>
+
+yo recomiendo que la politica de inventario sea con pedidos en espera por mas que lo pedidos lleguen cada 12 dias, el costo anual total es menor(115938.7) en comparacion a lo que se obtiene tieniendo sin pedidos en espera
+
+e) Cálculo del punto de reorden:
+Si el tiempo de espera es de 6 días, ¿cuál es el punto de reorden para las políticas de inventario con pedidos en espera y sin ellos?
+
+DEMANDA_DIARIA=D/NROdiasDeTrabajo=960/300=3.2 vehiculos/dia
+
+en 6 dias 6*3.2=19.2 vehiculos
+
+```
+MODELO EOQ
+    Demand rate(D):	960
+    Setup/ordering cost(S): 15	
+    Holding/carrying cost(H): 24
+    Unit cost: 120	
+
+Demand rate (Tasa de demanda): La tasa de demanda es la cantidad de unidades que se venden o utilizan en un periodo de tiempo determinado. Generalmente, se expresa en unidades por año (aunque también puede ser por mes, trimestre, etc.)
+
+Costo de pedido o setup (S): Es el costo asociado con realizar un pedido de reposición de inventario. Este costo incluye el tiempo y los recursos necesarios para hacer un pedido, como el trabajo administrativo, el transporte, y otros gastos fijos por pedido. No depende del tamaño del pedido, sino que es un costo fijo cada vez que se realiza un pedido.
+
+Costo de almacenamiento o retención (H): Es el costo asociado con mantener una unidad de inventario en almacenamiento durante un periodo determinado (por lo general, un año). Este costo incluye el alquiler de espacio, el seguro, el deterioro, y el costo de oportunidad de mantener inventario. Se calcula generalmente como un porcentaje del precio unitario de cada producto.
+
+Costo unitario (C):Es el costo de adquirir una unidad de producto, es decir, el precio de compra por cada unidad de inventario.
+```
+|Parameter|	Value|		Parameter|	Value|
+|-|-|-|-|
+Demand rate(D)|	960	|	Optimal order quantity (Q*)|	34,64|
+|Setup/ordering cost(S)|	15|		Maximum Inventory Level (Imax)|	34,64|
+|Holding/carrying cost(H)|	24	|	Average inventory	|17,32
+|||Unit cost|	120		|Orders per period (N)|	27,71|
+|||Annual Setup cost|	415,69|
+|||Annual Holding cost|	415,69|
+|||Total Inventory (Holding + Setup)| Cost	831,38
+|||Unit costs (PD)|	115200
+|||Total Cost (including units)|	116031,4
+
+
+````
+Parametros
+* Optimal Order Quantity (Q)*: La cantidad óptima de pedido, es la cantidad que debe pedirse en cada orden para minimizar el costo total de inventario. 
+
+* Maximum Inventory Level (Imax): El nivel máximo de inventario es la cantidad máxima de productos que se tendrá en inventario en cualquier momento dado, que ocurre justo después de hacer un nuevo pedido. Es el nivel más alto de inventario que la empresa tendrá antes de que se realice otro pedido para reabastecer el stock. Es igual a la cantidad de unidades que se piden en cada orden.
+
+* Average Inventory: El inventario promedio es la cantidad promedio de unidades que se mantiene en inventario durante un periodo de tiempo determinado. En un sistema de EOQ, el inventario promedio es generalmente la mitad del nivel máximo de inventario, ya que el inventario disminuye desde I max hasta 0 a medida que se venden los productos hasta que se realiza un nuevo pedido.
+
+* Unit Cost (C):Es el precio o costo de adquisición de cada unidad del producto. Se refiere al precio de compra de cada producto. Este es el costo directo de adquirir cada unidad de inventario.En el contexto de EOQ, no se considera un parámetro en los cálculos del modelo, pero es importante para los costos totales de la empresa
+
+* Annual Setup Cost: Es el costo total anual asociado con realizar los pedidos. Este costo depende de la cantidad de pedidos realizados durante el año y del costo por realizar cada pedido.
+
+* Annual Holding Cost: Es el costo total anual asociado con mantener el inventario en almacenamiento, que incluye costos como alquiler de espacio, deterioro, seguros y otros costos relacionados con el almacenamiento de las unidades.
+* Total Inventory Cost (Holding + Setup):Es el costo total anual de mantener el inventario, que incluye tanto los costos de retención (almacenaje) como los costos de realizar pedidos (setup).
+
+* Unit Cost (PD):Este término generalmente se refiere al costo total por unidad, considerando tanto el costo de adquisición (precio del producto) como los costos adicionales de mantener y ordenar el inventario.
+
+* Total Cost (Including Units): Es el costo total de adquirir, almacenar y manejar los productos, incluyendo tanto el costo de adquisición (costo por unidad) como el costo total de inventario (setup + retención).
+````
+```
+Resumen:
+-> Q* es la cantidad óptima de pedido que minimiza el costo total.
+-> Imax es el nivel máximo de inventario.
+-> Inventario promedio es el nivel medio de inventario durante un ciclo de pedido.
+-> Costo de setup anual y costo de retención anual son los costos operativos, y el costo total de inventario es la suma de ambos.
+-> Costo total (con unidades) incluye el costo de adquisición, más los costos de gestión del inventario.
+``` 
+
+
